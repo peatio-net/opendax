@@ -1,0 +1,62 @@
+version: '3.6'
+
+services:
+  parity:
+    image: openethereum/openethereum:v3.2.4
+    restart: always
+    command: |
+      --chain=<%= @config['parity']['network'] %>
+      --mode=active
+      --interface=all
+      --snapshot-peers=10
+      --min-peers=5
+      --max-peers=10
+      --jsonrpc-interface=0.0.0.0
+      --jsonrpc-cors=all
+      --jsonrpc-hosts=all
+      --jsonrpc-apis=all
+      --db-compaction=ssd
+    volumes:
+      - ../data/parity:/home/openethereum/.local/share/io.parity.ethereum
+    ports:
+      - "127.0.0.1:8545:8545"
+
+  electrumd-btc:
+    image: quay.io/openware/electrum:3.3.8-1
+    restart: always
+    env_file:
+      - ../config/kaigara.env
+      - ../config/electrumd-btc.env
+    volumes:
+      - ../data/electrumd-btc:/data
+    command:
+      - kaigara
+      - start-electrum.py
+
+  electrumd-ltc:
+    image: quay.io/openware/electrum-ltc:3.3.8.1
+    restart: always
+    env_file:
+      - ../config/kaigara.env
+      - ../config/electrumd-ltc.env
+    volumes:
+      - ../data/electrumd-ltc:/data
+    command:
+      - kaigara
+      - start-electrum.py
+
+  bitcoind:
+    image: quay.io/openware/bitcoind:0.19.1
+    restart: always
+    user: root
+    command: bitcoind
+    volumes:
+      - ../data/bitcoin:/bitcoin
+      - ../config/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
+
+  litecoind:
+    image: quay.io/openware/litecoind:0.16.3
+    restart: always
+    volumes:
+      - ../data/litecoin:/litecoin
+      - ../config/litecoin.conf:/litecoin/litecoin.conf

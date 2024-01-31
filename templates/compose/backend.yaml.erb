@@ -1,0 +1,70 @@
+version: '3.6'
+
+services:
+  db:
+    restart: always
+    <%- if @config['database']['adapter'] == 'mysql' %>
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+      - ../config/mysql:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: <%= @config['database']['password'] %>
+      MYSQL_DATABASE: sonic
+    <%- elsif @config['database']['adapter'] == 'postgresql' %>
+    image: postgres:13
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: <%= @config['database']['user'] %>
+      POSTGRES_PASSWORD: <%= @config['database']['password'] %>
+    <%- end %>
+
+  influxdb:
+    image: influxdb:1.7.10
+    restart: always
+    volumes:
+      - influx_data:/var/lib/influxdb
+      - ../config/influxdb/build_candles.sql:/build_candles.sql
+      - ../config/influxdb/arke.sql:/arke.sql
+      - ../config/influxdb/peatio.sql:/peatio.sql
+      - ../config/arke/historical_data:/data/historical_data
+    environment:
+       INFLUXDB_ADMIN_ENABLED: "true"
+
+  redis:
+    image: redis:4.0.10
+    restart: always
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+
+  rabbitmq:
+    image: rabbitmq:3.7.6-management
+    restart: always
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  vault:
+    image: vault:1.3.0
+    restart: always
+    volumes:
+      - vault_data:/vault
+      - ../config/vault:/tmp/policies
+    command:
+      - server
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
+    environment:
+      VAULT_LOCAL_CONFIG: '{"storage": {"file": { "path": "/vault/data" }}, "listener": {"tcp":{"address": "0.0.0.0:8200","tls_disable":"1"}}}'
+      VAULT_ADDR: http://vault:8200
+
+volumes:
+  db_data:
+  rabbitmq_data:
+  redis_data:
+  vault_data:
+  influx_data:

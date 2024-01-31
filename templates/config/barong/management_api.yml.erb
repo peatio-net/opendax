@@ -1,0 +1,11 @@
+keychain:
+  sonic:
+    algorithm: RS256
+    value: <%= @sonic_public_key %>
+
+scopes:
+  read_users:
+    mandatory_signers:
+      - sonic
+    permitted_signers:
+      - sonic

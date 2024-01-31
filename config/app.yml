@@ -1,0 +1,136 @@
+---
+app:
+  name: OpenDAX
+  domain: app.local
+  subdomain: www
+  show_landing: true
+  opendax_addr: https://www.opendax.cloud
+  wizard_enabled: true
+render_protect: false
+csrfEnabled: true
+ssl:
+  enabled: false
+  email: support@example.com
+updateVersions: false
+images:
+  peatio: quay.io/openware/peatio:3.1.0-ada4174
+  barong: quay.io/openware/barong:3.0.5
+  sonic: quay.io/openware/baseapp:d61d0626
+  tower: quay.io/openware/tower:3.0.44
+  rango: quay.io/openware/rango:3.0.1
+  finex: quay.io/openware/openfinex:3.0.0-74d3b52
+vendor:
+  frontend: git@github.com:openware/baseapp.git
+kyc:
+  provider: local
+  authorization_token: changeme
+  sandbox_mode: true
+  api_endpoint: https://api.kycaid.com/
+vault:
+  root_token: changeme
+  peatio_rails_token: changeme
+  peatio_crypto_token: changeme
+  peatio_upstream_token: changeme
+  peatio_matching_token: changeme
+  barong_token: changeme
+  finex_engine_token: changeme
+  kaigara_token: changeme
+  sonic_token: changeme
+database:
+  host: db
+  adapter: mysql
+  port: 3306
+  user: root
+  password: changeme
+storage:
+  provider: Google
+  bucketName: opendax-barong-docs-bucket
+  region: fra1
+  endpoint: https://fra1.digitaloceanspaces.com
+  accessKey: changeme
+  secretKey: changeme
+  signatureVersion: '2'
+  uploadMinSize: 1
+  uploadMaxSize: 20
+twilio:
+  enabled: false
+  phone_number: "+15005550000"
+  account_sid: changeme
+  auth_token: changeme
+gaTrackerKey: ''
+captcha:
+  type: none
+  siteKey: changeme
+  secretKey: changeme
+smtp:
+  host: smtp.sendgrid.net
+  port: 2525
+  user: apikey
+  password: changeme
+  sender_email: noreply@barong.io
+  sender_name: Postmaster
+  sender_logo: https://storage.googleapis.com/public_peatio/logo.png
+wallets:
+  eth:
+  - kind: deposit
+    address: changeme
+    max_balance: 0.0
+    secret: changeme
+  - kind: hot
+    address: changeme
+    max_balance: 100.0
+    secret: changeme
+  - kind: warm
+    address: changeme
+    max_balance: 1000.0
+    secret: changeme
+  btc:
+  - kind: deposit
+    address: changeme
+    max_balance: 0.0
+  - kind: hot
+    address: changeme
+    max_balance: 100.0
+  - kind: warm
+    address: changeme
+    max_balance: 1000.0
+parity:
+  network: kovan
+  address: parity
+  rpcport: 8545
+  port: 30303
+bitcoind:
+  enabled: false
+  rpcuser: admin
+  rpcpassword: changeme
+  address: bitcoind
+  network: testnet
+  rpcport: 18332
+  port: 18333
+litecoind:
+  rpcuser: admin
+  rpcpassword: changeme
+  address: litecoind
+  network: testnet
+  rpcport: 19332
+  port: 19335
+electrumd_btc:
+  user: opendax
+  password: changeme
+  wallet_passphrase: luc1d1tyc0m3b@ck
+  testnet: true
+  segwit: false
+electrumd_ltc:
+  user: opendax
+  password: changeme
+  wallet_passphrase: th3l3ss1kn0wth3b3tt3r
+  testnet: true
+  segwit: false
+terraform:
+  credentials: "~/safe/opendax.json"
+  project: example-opendax
+  region: europe-west4
+  zone: europe-west4-a
+  instance_name: opendax-cloud
+  machine_type: n1-standard-4
+  image: debian-cloud/debian-9

@@ -1,0 +1,20 @@
+version: '3.6'
+
+services:
+  superset:
+    image: "<%= @utils['images']['superset'] %>"
+    restart: always
+    volumes:
+      - superset_db:/var/lib/superset
+    labels:
+      - "traefik.http.routers.superset-<%= @name %>.rule=Host(`superset.<%= @config['app']['domain'] %>`)"
+      - "traefik.http.services.superset-<%= @name %>.loadbalancer.server.port=8088"
+      - "traefik.enable=true"
+      <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.superset-<%= @name %>.entrypoints=websecure"
+      <%- else -%>
+      - "traefik.http.routers.superset-<%= @name %>.entrypoints=web"
+      <%- end -%>
+
+volumes:
+  superset_db:

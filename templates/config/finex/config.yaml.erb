@@ -1,0 +1,74 @@
+metrics:
+  enabled: true
+log_level:
+  log_observer: info
+messaging:
+  exchanges:
+    - name:    finex.orderapi
+      type:    direct
+      durable: false
+    - name:    finex.events.websocket
+      type:    topic
+      durable: false
+    - name:    peatio.events.ranger
+      type:    topic
+      durable: false
+    - name:    peatio.trade
+      type:    headers
+      durable: false
+    - name:    peatio.events
+      type:    direct
+      durable: false
+    - name: peatio.matching
+      type: direct
+      durable: false
+  queues:
+    - name:    finex.gateway
+    - name:    finex.events.processor
+    - name:    finex.influx.writer
+orderbook:
+  max_publish_size: 300
+gateway:
+  rate:
+    maker:
+      - limit: 500
+        period: 10s
+    admin:
+      - limit: 500
+        period: 10s
+    superadmin:
+      - limit: 500
+        period: 10s
+    bench:
+      - limit: 9000
+        period: 1s
+    default:
+      - limit: 50
+        period: 10s
+      - limit: 10000
+        period: 24h
+api:
+  bulk_limit: 100
+  rate:
+    maker:
+      limit: 500
+      period: 10s
+    admin:
+      limit: 500
+      period: 10s
+    superadmin:
+      limit: 500
+      period: 10s
+    default:
+      limit: 5
+      period: 1s
+  actions:
+    trade:
+      min_level: 2
+      roles: [member, broker, trader, maker, admin, superadmin]
+    bulk_api:
+      min_level: 3
+      roles: [maker, admin, superadmin]
+    admin:
+      min_level: 3
+      roles: [admin, superadmin]

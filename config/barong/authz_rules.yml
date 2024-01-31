@@ -1,0 +1,19 @@
+#
+# pass for whitelisted (public) routes
+# block for blacklisted routes
+#
+rules:
+  pass:
+    - api/v2/barong/public
+    - api/v2/barong/identity
+    - api/v2/peatio/public
+    - api/v2/peatio/coinmarketcap
+    - api/v2/peatio/coingecko
+    - api/v2/ranger/public
+    - api/v2/applogic/public
+    - api/v2/arke/public
+    - api/v2/finex/public
+    - api/v2/sonic/public
+  block:
+    - api/v2/barong/management
+    - api/v2/peatio/management
