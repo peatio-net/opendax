@@ -57,7 +57,7 @@ static_resources:
               - match:
                   prefix: "/api/v2/finex"
                 route:
-                  cluster: finex
+                  cluster: peatio
                   prefix_rewrite: "/api/v2/"
               - match:
                   prefix: "/admin"
@@ -169,7 +169,7 @@ static_resources:
     lb_policy: round_robin
     hosts:
     - socket_address:
-        address: finex-api
+        address: peatio
         port_value: 8080
   - name: rango
     connect_timeout: 0.25s

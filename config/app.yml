@@ -4,10 +4,11 @@ app:
   domain: app.local
   subdomain: www
   show_landing: true
-  opendax_addr: https://www.opendax.cloud
+  opendax_addr: https://www.app.local
   wizard_enabled: true
 render_protect: false
 csrfEnabled: true
+  gaTrackerKey: UA-100000000-1
 ssl:
   enabled: false
   email: support@example.com
@@ -26,7 +27,11 @@ kyc:
   authorization_token: changeme
   sandbox_mode: true
   api_endpoint: https://api.kycaid.com/
+  callback_url: https://www.app.local/api/v2/barong/public/kyc
+  sandbox_mode: true
+  webform_mode: false
 vault:
+  host: http://vault:8200
   root_token: changeme
   peatio_rails_token: changeme
   peatio_crypto_token: changeme
@@ -42,14 +47,16 @@ database:
   port: 3306
   user: root
   password: changeme
+  barong: barong_production
+  peatio: peatio_production
 storage:
-  provider: Google
+  provider: AWS
   bucketName: opendax-barong-docs-bucket
   region: fra1
   endpoint: https://fra1.digitaloceanspaces.com
   accessKey: changeme
   secretKey: changeme
-  signatureVersion: '2'
+  signatureVersion: '4'
   uploadMinSize: 1
   uploadMaxSize: 20
 twilio:
@@ -95,7 +102,7 @@ wallets:
     address: changeme
     max_balance: 1000.0
 parity:
-  network: kovan
+  enabled: false  network: kovan
   address: parity
   rpcport: 8545
   port: 30303
@@ -133,4 +140,4 @@ terraform:
   zone: europe-west4-a
   instance_name: opendax-cloud
   machine_type: n1-standard-4
-  image: debian-cloud/debian-9
+  image: debian-cloud/debian-11

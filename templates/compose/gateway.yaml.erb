@@ -3,7 +3,7 @@ version: '3.6'
 services:
   gateway:
     restart: always
-    image: envoyproxy/envoy:v1.10.0
+    image: envoyproxy/envoy:v1.12.5
     volumes:
       - ../config/gateway:/etc/envoy/
     command: /usr/local/bin/envoy -l info -c /etc/envoy/envoy.yaml

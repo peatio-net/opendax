@@ -56,6 +56,24 @@ services:
       - ../config/kaigara.env
     command: kaigara ./rango
 
+  # PMC enable original RoR Trade daemons, mo Finex available 05-Aug-2022
+  matching:
+    << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=<%= @config['vault']['peatio_matching_token'] %>
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb matching"
+
+  order_processor:
+    << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=<%= @config['vault']['peatio_matching_token'] %>
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb order_processor"
+
+  trade_executor:
+    << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=<%= @config['vault']['peatio_matching_token'] %>
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
   mailer:
     restart: always
     image: "<%= @config['images']['barong'] %>"
@@ -70,7 +88,7 @@ services:
 
   applogic_sidekiq:
     restart: always
-    image: "<%= @utils['images']['applogic'] %>"
+    image: "<%= @config['images']['applogic'] %>"
     env_file:
       - ../config/barong.env
       - ../config/kaigara.env

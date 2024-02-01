@@ -34,29 +34,9 @@ services:
       - ../config/barong/abilities.yml:/home/app/config/abilities.yml
     command: bash -c "kaigara bundle exec puma --config config/puma.rb"
 
-  finex-api:
-    restart: always
-    image: "<%= @config['images']['finex'] %>"
-    env_file:
-      - ../config/finex.env
-      - ../config/kaigara.env
-    command: "kaigara ./orderapi"
-    volumes:
-      - ../config/finex:/app/config:ro
-
-  finex-engine:
-    restart: always
-    image: "<%= @config['images']['finex'] %>"
-    env_file:
-      - ../config/finex.env
-      - ../config/kaigara.env
-    command: "kaigara ./finex"
-    volumes:
-      - ../config/finex:/app/config:ro
-
   applogic:
     restart: always
-    image: "<%= @utils['images']['applogic'] %>"
+    image: "<%= @config['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env
       - ../config/kaigara.env

@@ -89,7 +89,7 @@ namespace :service do
 
   desc 'Run daemons (rango, peatio daemons, barong sidekiq)'
   task :daemons, [:command] do |_task, args|
-    @daemons = %w[rango blockchain cron_job upstream deposit deposit_coin_address withdraw_coin influx_writer barong_sidekiq finex-engine finex-api]
+    @daemons = %w[rango blockchain cron_job upstream deposit deposit_coin_address withdraw_coin influx_writer barong_sidekiq]
 
     args.with_defaults(:command => 'start')
 

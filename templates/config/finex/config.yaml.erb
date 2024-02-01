@@ -1,7 +1,7 @@
 metrics:
   enabled: true
 log_level:
-  log_observer: info
+  log_observer: warn
 messaging:
   exchanges:
     - name:    finex.orderapi
@@ -48,8 +48,11 @@ gateway:
       - limit: 10000
         period: 24h
 api:
-  bulk_limit: 100
+  bulk_limit: 200
   rate:
+    trader:
+      limit: 1000
+      period: 10s
     maker:
       limit: 500
       period: 10s
@@ -68,7 +71,7 @@ api:
       roles: [member, broker, trader, maker, admin, superadmin]
     bulk_api:
       min_level: 3
-      roles: [maker, admin, superadmin]
+      roles: [maker, admin, superadmin, trader]
     admin:
       min_level: 3
       roles: [admin, superadmin]
