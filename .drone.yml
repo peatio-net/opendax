@@ -4,7 +4,7 @@ name: default
 
 steps:
 - name: Run rspec
-  image: ruby:2.6.5
+  image: ruby:2.7.8
   commands:
     - gem install bundler
     - bundle

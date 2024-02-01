@@ -12,14 +12,14 @@ csrfEnabled: true
 ssl:
   enabled: false
   email: support@example.com
-updateVersions: false
+  updateVersions: false
 images:
-  peatio: quay.io/openware/peatio:3.1.0-ada4174
-  barong: quay.io/openware/barong:3.0.5
-  sonic: quay.io/openware/baseapp:d61d0626
-  tower: quay.io/openware/tower:3.0.44
-  rango: quay.io/openware/rango:3.0.1
-  finex: quay.io/openware/openfinex:3.0.0-74d3b52
+  peatio: peatiodao/peatio:20240201
+  barong: peatiodao/barong:20240201
+  sonic: peatiodao/opendax_frontend_1:3-1-Master
+  tower: peatiodao/tower:3.1.0-1f64f44
+  rango: peatiodao/rango:20240201
+
 vendor:
   frontend: git@github.com:openware/baseapp.git
 kyc:
@@ -102,7 +102,8 @@ wallets:
     address: changeme
     max_balance: 1000.0
 parity:
-  enabled: false  network: kovan
+  enabled: false
+  network: kovan
   address: parity
   rpcport: 8545
   port: 30303
