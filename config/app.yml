@@ -6,8 +6,8 @@ app:
   show_landing: true
   opendax_addr: https://www.app.local
   wizard_enabled: true
-render_protect: false
-csrfEnabled: true
+  render_protect: false
+  csrfEnabled: true
   gaTrackerKey: UA-100000000-1
 ssl:
   enabled: false
