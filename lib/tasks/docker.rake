@@ -1,7 +1,7 @@
 namespace :docker do
     desc 'Stop all runnning docker contrainers'
     task :down do
-        sh 'docker-compose down'
+        sh 'docker compose down'
     end
 
     desc 'Clean up all docker volumes'

@@ -30,13 +30,13 @@ rake render:config
 4. Restart envoy
 
 ```bash
-docker-compose up -dV gateway
+docker compose up -dV gateway
 ```
 
 5. Finally you can inspect the envoy logs
 
 ```bash
-docker-compose logs -f --tail 100 gateway
+docker compose logs -f --tail 100 gateway
 ```
 
 Here are the relevant logs:

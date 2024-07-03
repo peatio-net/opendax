@@ -1,7 +1,8 @@
 ---
 app:
   name: OpenDAX
-  domain: app.local
+  tag: OpenDAX
+  domain: app.local  
   subdomain: www
   show_landing: true
   opendax_addr: https://www.app.local
@@ -14,11 +15,11 @@ ssl:
   email: support@example.com
   updateVersions: false
 images:
+  sonic: peatiodao/opendax_frontend_1:3-1-Master
   peatio: peatiodao/peatio:20240201
   barong: peatiodao/barong:20240201
-  sonic: peatiodao/opendax_frontend_1:3-1-Master
-  tower: peatiodao/tower:3.1.0-1f64f44
   rango: peatiodao/rango:20240201
+  tower: peatiodao/tower:3.1.0-1f64f44
 
 vendor:
   frontend: git@github.com:openware/baseapp.git
@@ -58,12 +59,14 @@ storage:
   secretKey: changeme
   signatureVersion: '4'
   uploadMinSize: 1
-  uploadMaxSize: 20
+  uploadMaxSize: 50
 twilio:
   enabled: false
   phone_number: "+15005550000"
   account_sid: changeme
   auth_token: changeme
+  sms_content_template: 'Your OpenDAX verification code is: {{code}}. Do not share
+    this code with anyone; our staff will never ask for the code.'
 gaTrackerKey: ''
 captcha:
   type: none
@@ -76,7 +79,7 @@ smtp:
   password: changeme
   sender_email: noreply@barong.io
   sender_name: Postmaster
-  sender_logo: https://storage.googleapis.com/public_peatio/logo.png
+  sender_logo: https://app.local/email/logo.png
 wallets:
   eth:
   - kind: deposit

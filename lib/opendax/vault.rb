@@ -9,7 +9,7 @@ module Opendax
     end
 
     def vault_exec(command)
-      `docker-compose exec -T vault sh -c '#{command}'`
+      `docker compose exec -T vault sh -c '#{command}'`
     end
 
     def secrets(command, endpoints, options = '')

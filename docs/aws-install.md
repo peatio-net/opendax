@@ -28,10 +28,10 @@ curl -fsSL https://get.docker.com/ | bash
 usermod -a -G docker $USER
 
 COMPOSE_VERSION="1.23.2"
-COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)"
+COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSION/docker compose-$(uname -s)-$(uname -m)"
 
-curl -L "$COMPOSE_URL" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+curl -L "$COMPOSE_URL" -o /usr/local/bin/docker compose
+chmod +x /usr/local/bin/docker compose
 ```
 
 ### User creation
@@ -50,8 +50,8 @@ As the `app` user(`sudo su app`), run:
 gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
 source /home/app/.rvm/scripts/rvm
-rvm install --quiet-curl 2.7.8
-rvm use --default 2.7.8
+rvm install --quiet-curl 2.6.1
+rvm use --default 2.6.1
 gem install bundler
 ```
 

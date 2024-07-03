@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 COMPOSE_VERSION="1.23.2"
-COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)"
+COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSION/docker compose-$(uname -s)-$(uname -m)"
 
 # Opendax bootstrap script
 install_core() {
@@ -30,8 +30,8 @@ install_docker() {
   curl -fsSL https://get.docker.com/ | bash
   sudo bash <<EOS
 usermod -a -G docker $USER
-curl -L "$COMPOSE_URL" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+curl -L "$COMPOSE_URL" -o /usr/local/bin/docker compose
+chmod +x /usr/local/bin/docker compose
 EOS
 }
 

@@ -17,6 +17,7 @@ OpenDAX is an open-source cloud-native multi-service platform for building a Blo
 ### 1. Get a VM
 
 Minimum VM requirements for OpenDAX:
+
  * 8GB of RAM (12GB recommended)
  * 4 cores vCPU (6 cores recommended)
  * 300GB disk space (SSD recommended)
@@ -26,7 +27,9 @@ A VM from any cloud provider like DigitalOcean, Vultr, GCP, AWS as well as any d
 ### 2. Prepare the VM
 
 #### 2.1 Create Unix user
+
 SSH using root user, then create new user for the application
+
 ```bash
 useradd -g users -s `which bash` -m app
 ```
@@ -41,16 +44,19 @@ Docker compose follow steps: [docker compose](https://docs.docker.com/compose/in
 #### 2.3 Install ruby in user app
 
 ##### 2.3.1 Change user using
+
 ```bash
 su - app
 ```
 
 ##### 2.3.2 Clone OpenDAX
+
 ```bash
 git clone https://github.com/openware/opendax.git
 ```
 
 ##### 2.3.3 Install RVM
+
 ```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
@@ -70,10 +76,12 @@ Using `rake -T` you can see all available commands, and can create new ones in `
 ### 4. Run everything
 
 #### 4.1 Configure your domain
+
 If using a VM you can point your domain name to the VM ip address before this stage.
 Recommended if you enabled SSL, for local development edit the `/etc/hosts`
 
 Insert in file `/etc/hosts`
+
 ```
 0.0.0.0 www.app.local
 ```
@@ -85,6 +93,7 @@ rake service:all
 ```
 
 You can login on `www.app.local` with the following default users from seeds.yaml
+
 ```
 Seeded users:
 Email: admin@barong.io, password: 0lDHd9ufs9t@
@@ -141,6 +150,7 @@ As soon as any component's (barong, peatio, etc.) configuration is changed, it w
 
 You can also alter platform configurations directly from the terminal.
 To do this:
+
 1. Open `config/secrets.yaml` or create a file with the same structure
 2. Add or edit new configuration data for component(s) you'd like to update
 3. Run `./tmp/kaisave --filepath *filepath*` to load all configurations from a given file
@@ -267,6 +277,7 @@ Modify `config/app.yml` with correct image and run `rake service:all`
 This will rerender all the files from `templates` directory and restart all the running services.
 
 Alternitavely you can update the following files:
+
   * `config/app.yml`
   * `templates/compose/*component*.yml`
   * `compose/*component*.yml`
@@ -278,6 +289,7 @@ Modify `config/*component*/*config*` and run `rake service:component[start]`,
 if you want the changes to be persistent, you also need to update `templates/config/*components*/*config*`
 
 #### Render compose file
+
 ```
 # Delete all generated files
 git clean -fdx
@@ -286,56 +298,64 @@ git clean -fdx
 rake render:config
 
 # Restart the container you need to reload config
-docker-compose up frontend -Vd
+docker compose up frontend -Vd
 ```
 
 #### Clone the vendors and start
+
 ```
 source ./bin/set-env.sh
 rake vendor:clone
-docker-compose -f compose/vendor.yaml up -d
+docker compose -f compose/vendor.yaml up -d
 ```
 
 ## Vault management
+
 Opendax uses [Vault Policies](https://www.vaultproject.io/docs/concepts/policies) to restrict components' access to sensitive data. Each component has its own Vault token which allows granular access only to the data required.
 
 OpenDAX has 2 rake tasks for Vault management:
+
 ```sh
 rake vault:setup # Initial Vault configuration (root token generation, unseal, endpoints configuration)
 rake vault:load_policies # Components' Vault token generation
 ```
 
 ### Troubleshooting
+
 #### Vault is sealed
 
 In case of such error:
+
 1. Run `rake vault:setup`
 2. Restart the component
 
 Make sure you're not using an existing Docker volume for Vault(i.e. one left after a different Vault container deployment):
+
 ```sh
 docker volumes ps | grep vault
 ```
 
 In case there are existing volumes, remove the running Vault container via `docker rm -f *id*` and run `docker volume rm -f *volume name*`
-Afterward, run `docker-compose up -Vd vault` and re-run `rake vault:setup`.
+Afterward, run `docker compose up -Vd vault` and re-run `rake vault:setup`.
 
 #### Vault permission denied
+
 Usually, this means that one of your Vault tokens has expired.
 
 To fix the issue:
+
 1. Run `rake vault:load_policies`
 2. Run `rake render:config`
 3. Restart Vault dependant components:
 
     ```
-    docker-compose up -Vd barong peatio cron_job deposit deposit_coin_address withdraw_coin upstream
+   docker compose up -Vd barong peatio cron_job deposit deposit_coin_address withdraw_coin upstream
 
     # If you are using Finex
-    docker-compose up -Vd finex-engine
+   docker compose up -Vd finex-engine
 
     # If you are using Peatio Matching Engine
-    docker-compose up -Vd matching order_processor trade_executor
+   docker compose up -Vd matching order_processor trade_executor
     ```
 
 ## Terraform Infrastructure as Code Provisioning
@@ -343,6 +363,7 @@ To fix the issue:
 You can easily deploy OpenDAX from scratch on Google Cloud Platform using [Terraform](https://www.terraform.io)!
 
 To do this, just follow these simple steps:
+
   - Fill `app.yml` with correct values
   - Run `rake terraform:apply`
   - Access your VM from the GCP Cloud Console
@@ -361,11 +382,15 @@ If you'd like to use a real API from an existing OpenDAX deployment when develop
 
 1. Set `allow_origin` as `"*"`
 
+
 2. Configure all the needed HTTP methods in `allow_methods`. For example: `allow_methods: "PUT, GET, POST, DELETE, PATCH"`
+
 
 3. Add `'total, page, x-csrf-token'` to `allow_headers` value
 
+
 4. Configure `expose_headers` in a similar way `expose_headers:  "total, page, x-csrf-token"`
+
 
 5. Add `allow_credentials: true` to your CORS configuration
 
@@ -383,7 +408,7 @@ cors:
 Afterwards, apply the config onto your deployment:
 ```
 rake render:config
-docker-compose up -Vd gateway
+docker compose up -Vd gateway
 ```
 
 ## Happy trading with OpenDAX!

@@ -57,7 +57,7 @@ class Webhook < Sinatra::Base
       renderer = Opendax::Renderer.new
       renderer.render
 
-      system "docker-compose up -Vd #{service}"
+      system "docker compose up -Vd #{service}"
     end
 
     return answer(500, 'could not restart container') unless $?.success?
