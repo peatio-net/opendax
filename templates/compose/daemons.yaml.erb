@@ -111,7 +111,7 @@ services:
 
   listener:
     restart: always
-    image: "<%= @utils['images']['applogic'] %>"
+    image: "<%= @config['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env
       - ../config/kaigara.env
