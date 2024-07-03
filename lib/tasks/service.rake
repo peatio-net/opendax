@@ -39,15 +39,15 @@ namespace :service do
 
     def start
       puts '----- Starting dependencies -----'
-      # PMC sh 'docker compose up -d vault db redis rabbitmq'
-      sh 'docker compose up -d vault redis rabbitmq applogic'
+      # PMC sh 'docker compose up -d vault db redis rabbitmq applogic'
+      sh 'docker compose up -d vault redis rabbitmq'
       sleep 7 # time for db to start, we can get connection refused without sleeping
     end
 
     def stop
       puts '----- Stopping dependencies -----'
-      # PMC sh 'docker compose rm -fs vault db redis rabbitmq'
-      sh 'docker compose rm -fs vault redis rabbitmq applogic'
+      # PMC sh 'docker compose rm -fs vault db redis rabbitmq applogic'
+      sh 'docker compose rm -fs vault redis rabbitmq'
     end
 
 

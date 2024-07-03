@@ -16,11 +16,12 @@ ssl:
   updateVersions: false
 images:
   sonic: peatiodao/opendax_frontend_1:3-1-Master
-  peatio: peatiodao/peatio:20240201
+  applogic: peatiodao/applogic:latest  
+# arke: peatiodao/arke:20240201 
   barong: peatiodao/barong:20240201
+  peatio: peatiodao/peatio:20240201
   rango: peatiodao/rango:20240201
   tower: peatiodao/tower:3.1.0-1f64f44
-
 vendor:
   frontend: git@github.com:openware/baseapp.git
 kyc:
