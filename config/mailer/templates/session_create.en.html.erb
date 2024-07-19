@@ -1,60 +1,35 @@
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+<table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+  <tbody>
+    <tr>
+      <td style="padding: 0px 0px 0px 10px;">
+        <p style="font-size: 24px; font-weight: 600; text-transform: capitalize; padding: 0 0 20px;">New Login</p>
+        <p style="font-size: 16px; font-weight: 400; padding: 0 0 30px;">Hi <%= @user.email %>,</p>
+        <p style="font-size: 16px; font-weight: 400; padding: 0 0 30px;">We have detected a new login to your CoinPort Exchange account.</p>
+<table cellpadding="0" cellspacing="0" border="0">
   <tr>
-    <td>&nbsp;</td>
-    <td class="container">
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td>
-            <%= image_tag @logo, alt: 'Company Logo', class: 'logo-img' %>
-          </td>
-        </tr>
-      </table>
-    <td>&nbsp;</td>
+    <td style="padding: 8px;"><img src="https://doc.coinport.com.au/images/icon_calendar.png" alt="Date/Time" width="16" height="16"></td>
+    <td style="font-size:15px; font-size:0.95rem; font-size:max(15px, 0.95rem);padding: 8px;">Date/Time:</td>
+    <td style="font-size:15px; font-size:0.95rem; font-size:max(15px, 0.95rem);padding: 8px;"><b><%= @record.created_at %></b></td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
-    <td class="container">
-      <div class="content">
-        <table role="presentation" class="main">
-          <!-- START MAIN CONTENT AREA -->
-          <tr>
-            <td class="wrapper">
-              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td>
-                    <br />
-                    <p>Hello!</p>
-                    <p>
-                      We detected a login to your account.
-                    </p>
-                    <p>IP Address: <%= @record.user_ip %></p>
-                    <p>User-agent: <%= @record.user_agent %></p>
-
-                    <p>If this was you, please disregard this email.</p>
-
-                    <p>If this wasn't you, please change your passwords immediately, as someone else may be accessing your account.</p>
-                    <br /><br /><br />
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        <!-- END MAIN CONTENT AREA -->
-        </table>
-      </div>
-      <!-- START FOOTER -->
-      <div class="footer">
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-          <tr>
-            <td class="content-block">
-              <span>Company Inc, 3 Abbey Road, San Francisco CA 94102, USA</span>
-              <br><a href="http://opendax.io">opendax.io</a>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <!-- END FOOTER -->
-    </td>
-    <td>&nbsp;</td>
+    <td style="padding: 8px;"><img src="https://doc.coinport.com.au/images/icon_location.png" alt="Location" width="16" height="16"></td>
+    <td style="font-size:15px; font-size:0.95rem; font-size:max(15px, 0.95rem);padding: 8px;">Location:</td>
+    <td style="font-size:15px; font-size:0.95rem; font-size:max(15px, 0.95rem);padding: 8px;"><b><%= @record.user_ip_country %></b></td>
   </tr>
+  <tr>
+    <td style="padding: 8px;"><img src="https://doc.coinport.com.au/images/icon_ip.png" alt="IP Address" width="16" height="16"></td>
+    <td style="font-size:15px; font-size:0.95rem; font-size:max(15px, 0.95rem);padding: 8px;">IP&nbsp;Address:</td>
+    <td style="font-size:15px; font-size:0.95rem; font-size:max(15px, 0.95rem);padding: 8px;"><b><%= @record.user_ip %></b></td>
+  </tr>
+  <tr>
+    <td style="padding: 8px;"><img src="https://doc.coinport.com.au/images/icon_browser.png" alt="Browser" width="16" height="16"></td>
+    <td style="font-size:15px; font-size:0.95rem; font-size:max(15px, 0.95rem);padding: 8px;">Browser:</td>
+    <td style="font-size:15px; font-size:0.95rem; font-size:max(15px, 0.95rem);padding: 8px;"><b><%= @record.user_agent %></b></td>
+  </tr>
+</table>
+        <p style="font-size: 16px; font-weight: 400; padding: 0 0 30px;">If this was you, please disregard this email.</p>
+        <p style="font-size: 16px; font-weight: 400; padding: 0 0 30px;">If this was NOT you, please change your password immediately, as someone else may be trying to access your account.</p>
+      </td>
+    </tr>
+  </tbody>
 </table>
