@@ -1,0 +1,28 @@
+<table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%"
+    style="table-layout: fixed;">
+    <tbody>
+        <tr>
+            <td style="padding: 0px 0px 0px 10px;">
+                <p style="font-size: 24px; font-weight: 600; text-transform: capitalize; padding: 0 0 20px;">Confirm
+                    Beneficiary Update</p>
+                <p style="font-size: 16px; font-weight: 400; padding: 0 0 30px;">Hi <%= @user.email %>,</p>
+                <p style="font-size: 16px; font-weight: 400; padding: 0 0 30px;">Your request to update a payment
+                    beneficiary has been completed for your CoinPort account with the following details:</p>
+                <ul>
+                    <li style="font-size: 16px; font-weight: 400;">Currency: <span
+                            style="font-weight: 500; text-transform: uppercase;">
+                            <%= @record.currency %>
+                        </span></li>
+                    <li style="font-size: 16px; font-weight: 400;">Network: <span
+                            style="font-weight: 500; text-transform: uppercase;">
+                            <%= @record.blockchain_key %>
+                        </span></li>
+                    <li style="font-size: 16px; font-weight: 400;">Beneficiary Name: <%= @record.name %>
+                    </li>
+                </ul>
+                <p style="font-size: 16px; font-weight: 400; padding: 0 0 30px;">If you did not make this request to
+                    update Payment Beneficiary records please contact the CoinPort Help Desk immediately.</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
